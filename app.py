@@ -50,7 +50,7 @@ input_data = pd.DataFrame({
 # One-hot encode 'Geography' with dense output
 geo_encoded = onehot_encoder_geo.transform(
     pd.DataFrame([[geography]], columns=['Geography'])
-).toarray()  # Explicit conversion to dense array
+)
 
 # Create DataFrame with proper column names
 geo_encoded_df = pd.DataFrame(
