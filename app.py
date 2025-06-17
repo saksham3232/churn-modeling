@@ -6,7 +6,7 @@ import pickle
 from sklearn.preprocessing import StandardScaler, LabelEncoder, OneHotEncoder
 
 # Load the trained model
-model = tf.keras.models.load_model('model.h5')
+model = tf.keras.models.load_model('model.h5', compile=False)
 
 # Load the encoders and scaler
 with open('label_encoder_gender.pkl', 'rb') as file:
@@ -48,7 +48,9 @@ input_data = pd.DataFrame({
 })
 
 # One-hot encode 'Geography'
-geo_encoded = onehot_encoder_geo.transform([[geography]])
+geo_encoded = onehot_encoder_geo.transform(pd.DataFrame([[geography]], columns=['Geography']))
+
+# Convert to DataFrame with correct column names
 geo_encoded_df = pd.DataFrame(geo_encoded, columns=onehot_encoder_geo.get_feature_names_out(['Geography']))
 
 # Combine one-hot encoded columns with input data
