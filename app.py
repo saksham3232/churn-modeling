@@ -21,15 +21,16 @@ with open('scaler.pkl', 'rb') as file:
 # Streamlit app
 st.title('Customer Churn Prediction')
 
-# User input
+# User input with step size and validation
 geography = st.selectbox('Geography', onehot_encoder_geo.categories_[0])
 gender = st.selectbox('Gender', label_encoder_gender.classes_)
-age = st.slider('Age', 18, 92)
-balance = st.number_input('Balance')
-credit_score = st.number_input('Credit Score')
-estimated_salary = st.number_input('Estimated Salary')
-tenure = st.slider('Tenure', 0, 10)
-num_of_products = st.slider('Number of Products', 1, 4)
+
+age = st.number_input('Age', min_value=18, max_value=92, value=30, step=1, placeholder="Enter age (18-92)")
+balance = st.number_input('Balance', min_value=0.0, value=0.0, step=1000.0, format="%.2f", placeholder="Enter balance")
+credit_score = st.number_input('Credit Score', min_value=300, max_value=900, value=600, step=10, placeholder="Enter credit score (300-900)")
+estimated_salary = st.number_input('Estimated Salary', min_value=0.0, value=0.0, step=1000.0, format="%.2f", placeholder="Enter estimated salary")
+tenure = st.number_input('Tenure', min_value=0, max_value=10, value=1, step=1, placeholder="Enter tenure (0-10)")
+num_of_products = st.number_input('Number of Products', min_value=1, max_value=4, value=1, step=1, placeholder="Enter number of products (1-4)")
 has_cr_card = st.selectbox('Has Credit Card', [0, 1])
 is_active_member = st.selectbox('Is Active Member', [0, 1])
 
