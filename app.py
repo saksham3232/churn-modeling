@@ -6,7 +6,7 @@ import pickle
 from sklearn.preprocessing import StandardScaler, LabelEncoder, OneHotEncoder
 
 # Load the trained model
-model = tf.keras.models.load_model('model.h5',compile=False)
+model = tf.keras.models.load_model('model.h5')
 
 # Load the encoders and scaler
 with open('label_encoder_gender.pkl', 'rb') as file:
