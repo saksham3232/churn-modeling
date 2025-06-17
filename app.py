@@ -47,11 +47,16 @@ input_data = pd.DataFrame({
     'EstimatedSalary': [estimated_salary]
 })
 
-# One-hot encode 'Geography'
-geo_encoded = onehot_encoder_geo.transform(pd.DataFrame([[geography]], columns=['Geography']))
+# One-hot encode 'Geography' with dense output
+geo_encoded = onehot_encoder_geo.transform(
+    pd.DataFrame([[geography]], columns=['Geography'])
+).toarray()  # Explicit conversion to dense array
 
-# Convert to DataFrame with correct column names
-geo_encoded_df = pd.DataFrame(geo_encoded, columns=onehot_encoder_geo.get_feature_names_out(['Geography']))
+# Create DataFrame with proper column names
+geo_encoded_df = pd.DataFrame(
+    geo_encoded,
+    columns=onehot_encoder_geo.get_feature_names_out(['Geography'])
+)
 
 # Combine one-hot encoded columns with input data
 input_data = pd.concat([input_data.reset_index(drop=True), geo_encoded_df], axis=1)
